@@ -9,7 +9,7 @@ Primary colour: `#003366`
 
 ## What you are building
 
-**USTFood** should help a student quickly answer: *where should I eat, and what should I get?*
+**USTFood** should help a student quickly answer: _where should I eat, and what should I get?_
 
 ### Minimum (required)
 
@@ -68,9 +68,3 @@ We read history and structure, not only the final demo.
 ## Integrity
 
 Do not share this test. You may use the internet, docs, and AI tools; the submission must be work you can explain. If you use AI, you should still own the product decisions.
-
-## Submission
-
-Submit a URL to a Git repository (GitHub or similar) that we can clone and run.
-
-Even a partial prototype is better than silence. Submit what you have.
