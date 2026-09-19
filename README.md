@@ -35,29 +35,6 @@ Go beyond the minimum if it makes USTFood more useful. Ideas from the brief:
 
 Only add extras you can defend as feasible for a real USThing product. Live canteen seating counts, kitchen cameras, and full payment flows are examples of features that look impressive and fall apart under questions.
 
-## How this starter helps — and what we still grade
-
-| Included | Still your job |
-| --- | --- |
-| Next.js app that runs | Information architecture and UI |
-| USThing colours, type, sidebar shell | Making it feel like a finished product |
-| Type suggestions | Extending or replacing the data model |
-| 3 sample venues, 2 sample reviews | A catalogue that feels like campus |
-| Stub `/venues/[id]` route | Detail, menu, and review experiences |
-| This brief | Trade-offs, extras, and polish |
-
-You may throw the starter away and start from `create-next-app` if you prefer. Matching USThing’s dashboard look still matters.
-
-Suggested layout if you keep this repo:
-
-```text
-src/app/                 routes
-src/components/          UI you own
-src/lib/types.ts         data shapes (optional to keep)
-src/lib/sample-data.ts   expand this
-docs/DESIGN.md           dashboard tokens
-```
-
 ## Setup
 
 ```bash
@@ -68,24 +45,6 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000).
 
 Create a branch `LASTNAME-FirstName-SID` and push only that branch, not `main`.
-
-## Suggested week (not mandatory)
-
-Use this if you want a pacing guide. Skipping around is fine.
-
-**Day 1 — Scope.** Walk campus (or use memory / maps). List 8–15 places students actually use. Write a one-line job for the product, e.g. “Decide lunch in 30 seconds before a 12:00 lecture.” Sketch two screens: browse and detail.
-
-**Day 2 — Data.** Expand `src/lib/sample-data.ts`. Include mix of kinds, prices, and locations (Academic Building, Shaw, LG7, nearby Hang Hau / Clear Water Bay Road, etc.). Keep wait times honest: peak vs quiet is more useful than a fake live sensor.
-
-**Day 3 — Discovery.** Replace the home canvas. Students should scan, filter or sort, and compare without reading a novel. Empty and no-result states count.
-
-**Day 4 — Detail + reviews.** Venue page with hours, location, ratings, menu, and a mock review flow that updates the UI (local state or mock API is enough).
-
-**Day 5 — Extra feature.** Pick **one** extra you can finish well. Search done properly beats five half-built gadgets.
-
-**Day 6 — USThing fit.** Light/dark, mobile, Poppins, navy, sidebar language. Compare against [app.usthing.xyz](https://app.usthing.xyz). Remove starter placeholder copy.
-
-**Day 7 — Ship.** README for *your* prototype (what you built, how to run, what is mock, why extras are feasible). Meaningful commits. Click through as a rushed student.
 
 ## Git and documentation
 
