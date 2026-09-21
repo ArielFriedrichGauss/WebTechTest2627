@@ -3,7 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Compass, MapPin, Menu, Moon, Pin, Star, Sun, X } from "lucide-react";
+import {
+  Compass,
+  MapPin,
+  Menu,
+  Moon,
+  Pin,
+  Sparkles,
+  Star,
+  Sun,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "./theme-provider";
 
@@ -11,6 +21,7 @@ const links = [
   { name: "Discover", path: "/discover", icon: Compass },
   { name: "Review", path: "/review", icon: Star },
   { name: "Venues", path: "/venues", icon: MapPin },
+  { name: "Bonus", path: "/bonus", icon: Sparkles },
 ];
 
 function isActivePath(pathname: string, path: string) {
@@ -36,7 +47,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           onClick={() => setMobileOpen((open) => !open)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
         >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </header>
 
@@ -47,7 +62,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       >
         <div className="flex h-full flex-col justify-between px-2 py-4">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center justify-center gap-2 px-2">
+            <Link
+              href="/"
+              className="flex items-center justify-center gap-2 px-2"
+            >
               <Image
                 src="/logo.png"
                 alt="USTFood"
@@ -56,7 +74,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 className="rounded-xl"
               />
               {(!collapsed || mobileOpen) && (
-                <span className="text-primary text-xl font-medium">USTFood</span>
+                <span className="text-primary text-xl font-medium">
+                  USTFood
+                </span>
               )}
             </Link>
             <nav className="space-y-1">

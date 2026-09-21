@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ApplicantTodos } from "@/components/applicant-todos";
 
 /**
  * Replace this starter canvas with your USTFood discovery experience.
@@ -22,28 +23,26 @@ export default function HomePage() {
         </p>
       </header>
 
-      <section className="border-base-content/20 rounded-xl border border-dashed p-6">
-        <h2 className="text-lg font-semibold">Your work starts here</h2>
-        <ul className="text-base-content/80 mt-3 list-disc space-y-2 pl-5 leading-6">
-          <li>
-            Discovery across canteens, cafés, restaurants, takeaway, and nearby
-            spots
-          </li>
-          <li>
-            Comparison using cuisine, price, location, hours, wait, and ratings
-          </li>
-          <li>Venue or menu detail</li>
-          <li>A review, rating, or feedback flow (mock is fine)</li>
-        </ul>
-        <p className="text-base-content/60 mt-4 text-sm">
-          Read README.md before you write UI. Delete this starter copy once the
-          product can stand on its own. A stub detail route exists at{" "}
-          <Link className="text-primary font-medium" href="/venues/lg1-canteen">
-            /venues/lg1-canteen
-          </Link>
-          .
-        </p>
-      </section>
+      <ApplicantTodos
+        title="Minimum to finish"
+        items={[
+          "Discover food options around HKUST (canteens, cafés, restaurants, takeaway, nearby).",
+          "Let students compare cuisine, price, location, hours, wait, and ratings.",
+          "Build a venue inspect view with a menu (or a clear substitute).",
+          "Add a review / rate / feedback flow — local mock state is enough.",
+          "Match USThing density, colour, and type (see docs/DESIGN.md).",
+        ]}
+      />
+
+      <p className="text-base-content/60 max-w-3xl text-sm leading-6">
+        Read README.md first. Sidebar routes are starter canvases with their own
+        to-dos. Delete this copy once the product can stand on its own. A stub
+        detail route exists at{" "}
+        <Link className="text-primary font-medium" href="/venues/lg1-canteen">
+          /venues/lg1-canteen
+        </Link>
+        .
+      </p>
     </div>
   );
 }

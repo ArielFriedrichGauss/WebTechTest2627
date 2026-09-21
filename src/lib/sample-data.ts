@@ -142,7 +142,8 @@ export const sampleVenues: Venue[] = [
     cuisine: ["Italian", "Western"],
     priceRange: "$$$",
     building: "University Center",
-    locationNote: "Italian restaurant when you want a sit-down meal, not a stall.",
+    locationNote:
+      "Italian restaurant when you want a sit-down meal, not a stall.",
     hours: {
       mon: "11:30–21:30",
       tue: "11:30–21:30",
@@ -204,7 +205,8 @@ export const sampleVenues: Venue[] = [
     cuisine: ["Hong Kong", "Chinese", "Asian mixed"],
     priceRange: "$",
     building: "Academic Building, LG7",
-    locationNote: "Lower-level canteen; often an alternative when LG1 is packed.",
+    locationNote:
+      "Lower-level canteen; often an alternative when LG1 is packed.",
     hours: {
       mon: "07:30–21:00",
       tue: "07:30–21:00",
@@ -217,7 +219,8 @@ export const sampleVenues: Venue[] = [
     estimatedWaitMinutes: 11,
     rating: 3.7,
     reviewCount: 192,
-    summary: "Another academic-building canteen with mixed stalls and student prices.",
+    summary:
+      "Another academic-building canteen with mixed stalls and student prices.",
     menu: [
       {
         id: "lg7-fried-rice",
@@ -327,7 +330,8 @@ export const sampleReviews: Review[] = [
     venueId: "lg1-canteen",
     author: "Year 2, SENG",
     rating: 4,
-    comment: "Fast on off-peak hours. Avoid 12:15–13:00 if you have a 13:30 class.",
+    comment:
+      "Fast on off-peak hours. Avoid 12:15–13:00 if you have a 13:30 class.",
     createdAt: "2026-09-12",
   },
   {

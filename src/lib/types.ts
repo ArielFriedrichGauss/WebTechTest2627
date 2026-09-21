@@ -13,14 +13,7 @@ export type VenueKind =
 
 export type PriceRange = "$" | "$$" | "$$$";
 
-export type Weekday =
-  | "mon"
-  | "tue"
-  | "wed"
-  | "thu"
-  | "fri"
-  | "sat"
-  | "sun";
+export type Weekday = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 
 export type OpeningHours = Partial<Record<Weekday, string | null>>;
 

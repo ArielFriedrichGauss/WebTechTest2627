@@ -1,9 +1,17 @@
+import Link from "next/link";
+import { ApplicantTodos } from "@/components/applicant-todos";
+import { sampleVenues } from "@/lib/sample-data";
+
 /**
  * Venues layout canvas — a catalogue of places, linking into detail.
+ * One sample card is provided; the rest of the list is yours.
  * Sample venues live in src/lib/sample-data.ts.
  */
 
 export default function VenuesPage() {
+  // TODO: drop slice(0, 1) and map the full catalogue (search/sort optional).
+  const venues = sampleVenues.slice(0, 1);
+
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 py-10 sm:px-8 sm:py-14">
       <header className="max-w-3xl">
@@ -19,16 +27,40 @@ export default function VenuesPage() {
         </p>
       </header>
 
-      <section className="border-base-content/20 rounded-xl border border-dashed p-6">
-        <h2 className="text-lg font-semibold">Venue list</h2>
-        <p className="text-base-content/60 mt-2 text-sm leading-6">
-          Build the catalogue here. Sample data is in{" "}
-          <code className="text-base-content/80">src/lib/sample-data.ts</code>{" "}
-          — names, kinds, prices, locations, hours, wait, ratings, and a short
-          menu per venue. Detail stubs are at{" "}
-          <code className="text-base-content/80">/venues/[id]</code>.
-        </p>
-      </section>
+      {venues.map((venue) => (
+        <Link
+          key={venue.id}
+          href={`/venues/${venue.id}`}
+          className="bg-neutral border-base-content/15 hover:border-primary/40 max-w-md rounded-xl border p-5 shadow-sm transition-colors"
+        >
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold">{venue.name}</h2>
+              <p className="text-base-content/70 mt-1 text-sm">
+                {venue.building}
+              </p>
+            </div>
+            <span className="bg-primary/10 text-primary shrink-0 rounded-full px-2.5 py-1 text-xs font-medium">
+              {venue.kind}
+            </span>
+          </div>
+          <p className="text-base-content/70 mt-3 text-sm leading-6">
+            {venue.summary}
+          </p>
+          <p className="text-base-content/50 mt-4 text-sm">
+            {venue.priceRange} · {venue.rating.toFixed(1)} ({venue.reviewCount})
+            · ~{venue.estimatedWaitMinutes} min wait
+          </p>
+        </Link>
+      ))}
+
+      <ApplicantTodos
+        items={[
+          "List the rest of the venues from src/lib/sample-data.ts using this card as a starting point.",
+          "Link each venue to its detail stub at /venues/[id] (or a routing approach you prefer).",
+          "Show enough facts that a student can pick a place before opening the inspect view.",
+        ]}
+      />
     </div>
   );
 }
