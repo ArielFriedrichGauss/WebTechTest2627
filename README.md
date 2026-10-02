@@ -26,14 +26,7 @@ You do **not** need a real backend, authentication, payments, or a production or
 
 ### Extra features (optional, judged)
 
-Go beyond the minimum if it makes USTFood more useful. Ideas from the brief:
-
-- Search, filters, sorting
-- Map or building-based discovery
-- Popular dishes, photos, meal deals, availability
-- Favorites, saved venues, recently viewed
-
-Only add extras you can defend as feasible for a real USThing product. Live canteen seating counts, kitchen cameras, and full payment flows are examples of features that look impressive and fall apart under questions.
+Go beyond the minimum if it makes USTFood more useful. Only add extras you can defend as feasible for a real USThing product. Live canteen seating counts, kitchen cameras, and full payment flows are examples of features that look impressive and fall apart under questions.
 
 ## Setup
 
