@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getReviewsForVenue, getVenueById } from "@/lib/sample-data";
 import { isOpenNow } from "@/lib/opening-hours";
+import { VenueReviews } from "@/components/venue-reviews";
 import type { Weekday } from "@/lib/types";
 
 type VenuePageProps = {
@@ -50,10 +51,7 @@ export default async function VenuePage({ params }: VenuePageProps) {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
-          <span className="text-base-content/70">
-            {venue.priceRange} · ★ {venue.rating.toFixed(1)} (
-            {venue.reviewCount} reviews)
-          </span>
+          <span className="text-base-content/70">{venue.priceRange}</span>
           <span className="text-base-content/70">
             ~{venue.estimatedWaitMinutes} min estimated wait
           </span>
@@ -114,35 +112,12 @@ export default async function VenuePage({ params }: VenuePageProps) {
         </div>
       </section>
 
-      <section>
-        <h2 className="text-lg font-semibold">Reviews</h2>
-        <div className="mt-3 space-y-3">
-          {reviews.length === 0 && (
-            <p className="text-base-content/60 text-sm">
-              No reviews yet — be the first to leave one.
-            </p>
-          )}
-          {reviews.map((review) => (
-            <article
-              key={review.id}
-              className="bg-neutral border-base-content/15 rounded-xl border p-4"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <p className="text-sm font-medium">{review.author}</p>
-                <span className="bg-primary/10 text-primary shrink-0 rounded-full px-2 py-0.5 text-xs font-medium">
-                  {review.rating.toFixed(1)}
-                </span>
-              </div>
-              <p className="text-base-content/70 mt-2 text-sm leading-6">
-                {review.comment}
-              </p>
-              <p className="text-base-content/40 mt-2 text-xs">
-                {review.createdAt}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <VenueReviews
+        venueId={venue.id}
+        initialReviews={reviews}
+        baseRating={venue.rating}
+        baseReviewCount={venue.reviewCount}
+      />
     </div>
   );
 }
