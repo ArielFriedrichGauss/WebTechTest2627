@@ -57,14 +57,6 @@ export default function VenuesPage() {
           </Link>
         ))}
       </div>
-
-      /**<ApplicantTodos
-        items={[
-          "List the rest of the venues from src/lib/sample-data.ts using this card as a starting point.",
-          "Link each venue to its detail stub at /venues/[id] (or a routing approach you prefer).",
-          "Show enough facts that a student can pick a place before opening the inspect view.",
-        ]}
-      />*/
     </div>
   );
 }

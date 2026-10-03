@@ -161,14 +161,6 @@ export default function DiscoverPage() {
           </div>
         )}
       </div>
-
-      /**<ApplicantTodos
-        items={[
-          "Render the remaining venues from src/lib/sample-data.ts (this card is only an example).",
-          "Make search, filters, and sorting actually change the list.",
-          "Keep the path to a venue detail page (or replace routing if you have a better flow).",
-        ]}
-      />*/
     </div>
   );
 }

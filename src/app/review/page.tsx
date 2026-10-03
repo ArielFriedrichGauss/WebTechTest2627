@@ -144,15 +144,6 @@ export default function ReviewPage() {
           );
         })}
       </div>
-
-      /**<ApplicantTodos
-        items={[
-          "Turn the example fields into a working form (venue, rating, comment) with local state.",
-          "Show the remaining reviews from src/lib/sample-data.ts — this card is only one sample.",
-          "Append a new mock review to the list on submit (no backend required).",
-          "Handle empty or invalid input so the flow still feels usable.",
-        ]}
-      />*/
     </div>
   );
 }
