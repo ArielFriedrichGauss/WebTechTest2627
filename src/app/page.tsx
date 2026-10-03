@@ -17,12 +17,23 @@ const CUISINE_OPTIONS = Array.from(
   new Set(sampleVenues.flatMap((venue) => venue.cuisine)),
 ).sort();
 
+const MAX_COMPARE = 3;
+
 export default function HomePage() {
   const [query, setQuery] = useState("");
   const [cuisine, setCuisine] = useState<string | null>(null);
   const [price, setPrice] = useState<PriceRange | null>(null);
   const [openNowOnly, setOpenNowOnly] = useState(false);
   const [sort, setSort] = useState<SortValue>("rating");
+  const [selected, setSelected] = useState<string[]>([]);
+
+  function toggleSelected(id: string) {
+    setSelected((current) => {
+      if (current.includes(id)) return current.filter((v) => v !== id);
+      if (current.length >= MAX_COMPARE) return current;
+      return [...current, id];
+    });
+  }
 
   const results = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -164,6 +175,27 @@ export default function HomePage() {
             >
               {isOpenNow(venue.hours) ? "Open now" : "Closed now"}
             </p>
+
+            <label
+              className="text-base-content/70 mt-3 flex w-fit items-center gap-2 text-xs"
+              onClick={(event) => {
+                // Stop this from bubbling to the parent <Link> and navigating.
+                event.preventDefault();
+                event.stopPropagation();
+                toggleSelected(venue.id);
+              }}
+            >
+              <input
+                type="checkbox"
+                readOnly
+                checked={selected.includes(venue.id)}
+                disabled={
+                  !selected.includes(venue.id) && selected.length >= MAX_COMPARE
+                }
+                className="h-3.5 w-3.5"
+              />
+              Compare
+            </label>
           </Link>
         ))}
 
@@ -173,6 +205,18 @@ export default function HomePage() {
           </p>
         )}
       </section>
+
+      {selected.length >= 2 && (
+        <div className="bg-neutral border-base-content/15 sticky bottom-4 mx-auto flex w-fit items-center gap-3 rounded-full border px-4 py-2 shadow-md">
+          <span className="text-sm">{selected.length} selected</span>
+          <Link
+            href={`/compare?ids=${selected.join(",")}`}
+            className="bg-primary text-primary-content rounded-full px-3 py-1.5 text-sm font-medium"
+          >
+            Compare
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
