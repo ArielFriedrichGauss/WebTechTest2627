@@ -1,15 +1,25 @@
 # USThing Web Technical Test 2026 — USTFood
 
-Prototype a food discovery experience for HKUST students. This repository is a **starter**, not a solution.
+A protoype for food discovery experience for HKUST students, **USTFood** helps a student quickly answer: _where should I eat, and what should I get?_
 
-You have **7 days**. Stack: **Next.js**.
+Stack: **Next.js**.
 
 Live design reference: [app.usthing.xyz](https://app.usthing.xyz)  
 Primary colour: `#003366`
 
-## What you are building
+## Setup
+```bash
+git clone <repository-url>
+cd <repository-directory>
+git checkout 21294666-wcipad
+npm install
+npm run dev
+```
+Then, open http://localhost:3000 in your browser to view the application.
 
-**USTFood** should help a student quickly answer: _where should I eat, and what should I get?_
+## Key Product Decisions
+1. Optimized filtering using useMemo hook in Discover page.
+2. Review submission managed entirely on the client's side.
 
 ### Minimum (required)
 
