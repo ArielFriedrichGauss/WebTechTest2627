@@ -35,7 +35,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-Create a branch `LASTNAME-FirstName-SID` and push only that branch, not `main`.
+Create a branch `SID-ITSO username` (for example `20800781-tmchan`) and push only that branch, not `main`.
 
 ## Git and documentation
 
