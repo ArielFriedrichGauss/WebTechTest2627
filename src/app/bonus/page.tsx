@@ -1,21 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { ApplicantTodos } from "@/components/applicant-todos";
-import { sampleVenues } from "@/lib/sample-data";
-
 /**
  * Open canvas for an optional extra. Replace this page with anything
  * that makes USTFood more useful — as long as you can defend it.
  */
 
 export default function BonusPage() {
-  const [query, setQuery] = useState("");
-  // TODO: search, map, or favorites — e.g. filter sampleVenues by `query`.
-  const matches = sampleVenues.filter((venue) =>
-    venue.name.toLowerCase().includes(query.trim().toLowerCase()),
-  );
-
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 py-10 sm:px-8 sm:py-14">
       <header className="max-w-3xl">
