@@ -4,13 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  ArrowLeftRight,
   Compass,
-  MapPin,
   Menu,
   Moon,
   Pin,
   Sparkles,
-  Star,
   Sun,
   X,
 } from "lucide-react";
@@ -18,13 +17,13 @@ import { useState } from "react";
 import { useTheme } from "./theme-provider";
 
 const links = [
-  { name: "Discover", path: "/discover", icon: Compass },
-  { name: "Review", path: "/review", icon: Star },
-  { name: "Venues", path: "/venues", icon: MapPin },
+  { name: "Discover", path: "/", icon: Compass },
+  { name: "Compare", path: "/compare", icon: ArrowLeftRight },
   { name: "Bonus", path: "/bonus", icon: Sparkles },
 ];
 
 function isActivePath(pathname: string, path: string) {
+  if (path === "/") return pathname === "/";
   return pathname === path || pathname.startsWith(`${path}/`);
 }
 

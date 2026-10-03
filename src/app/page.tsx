@@ -1,48 +1,178 @@
-import Link from "next/link";
-import { ApplicantTodos } from "@/components/applicant-todos";
+"use client";
 
-/**
- * Replace this starter canvas with your USTFood discovery experience.
- * Sample data lives in src/lib/sample-data.ts — expand it.
- */
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { sampleVenues } from "@/lib/sample-data";
+import { isOpenNow } from "@/lib/opening-hours";
+import type { PriceRange } from "@/lib/types";
+
+const PRICE_OPTIONS: PriceRange[] = ["$", "$$", "$$$"];
+const SORT_OPTIONS = [
+  { value: "rating", label: "Highest rated" },
+  { value: "wait", label: "Shortest wait" },
+] as const;
+type SortValue = (typeof SORT_OPTIONS)[number]["value"];
+
+const CUISINE_OPTIONS = Array.from(
+  new Set(sampleVenues.flatMap((venue) => venue.cuisine)),
+).sort();
 
 export default function HomePage() {
+  const [query, setQuery] = useState("");
+  const [cuisine, setCuisine] = useState<string | null>(null);
+  const [price, setPrice] = useState<PriceRange | null>(null);
+  const [openNowOnly, setOpenNowOnly] = useState(false);
+  const [sort, setSort] = useState<SortValue>("rating");
+
+  const results = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    const filtered = sampleVenues.filter((venue) => {
+      if (
+        normalizedQuery &&
+        !venue.name.toLowerCase().includes(normalizedQuery) &&
+        !venue.cuisine.some((c) => c.toLowerCase().includes(normalizedQuery))
+      ) {
+        return false;
+      }
+      if (cuisine && !venue.cuisine.includes(cuisine)) return false;
+      if (price && venue.priceRange !== price) return false;
+      if (openNowOnly && !isOpenNow(venue.hours)) return false;
+      return true;
+    });
+
+    return [...filtered].sort((a, b) =>
+      sort === "rating"
+        ? b.rating - a.rating
+        : a.estimatedWaitMinutes - b.estimatedWaitMinutes,
+    );
+  }, [query, cuisine, price, openNowOnly, sort]);
+
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 py-10 sm:px-8 sm:py-14">
+    <div className="mx-auto flex max-w-5xl flex-col gap-6 px-5 py-8 sm:px-8 sm:py-12">
       <header className="max-w-3xl">
-        <p className="text-primary mb-3 text-sm font-semibold tracking-wide uppercase">
+        <p className="text-primary mb-2 text-sm font-semibold tracking-wide uppercase">
           USThing · USTFood
         </p>
-        <h1 className="text-4xl leading-tight font-bold sm:text-5xl">
-          Help HKUST students decide where to eat.
+        <h1 className="text-3xl leading-tight font-bold sm:text-4xl">
+          Where should I eat?
         </h1>
-        <p className="text-base-content/70 mt-5 text-lg leading-8">
-          What is currently here is simply a potential template you could
-          follow. Feel free to change the layouts and user experience flow to
-          your likings.
+        <p className="text-base-content/70 mt-3 text-base leading-7">
+          Canteens, cafés, restaurants, takeaway, and nearby spots around
+          HKUST — filtered and sorted so you can decide between classes.
         </p>
       </header>
 
-      <ApplicantTodos
-        title="Minimum to finish"
-        items={[
-          "Discover food options around HKUST (canteens, cafés, restaurants, takeaway, nearby).",
-          "Let students compare cuisine, price, location, hours, wait, and ratings.",
-          "Build a venue inspect view with a menu (or a clear substitute).",
-          "Add a review / rate / feedback flow — local mock state is enough.",
-          "Match USThing density, colour, and type (see docs/DESIGN.md).",
-        ]}
-      />
+      <div className="flex flex-col gap-3">
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search by name or cuisine…"
+          className="border-base-content/15 bg-neutral w-full rounded-lg border px-3 py-2 text-sm"
+        />
 
-      <p className="text-base-content/60 max-w-3xl text-sm leading-6">
-        Read README.md first. Sidebar routes are starter canvases with their own
-        to-dos. Delete this copy once the product can stand on its own. A stub
-        detail route exists at{" "}
-        <Link className="text-primary font-medium" href="/venues/lg1-canteen">
-          /venues/lg1-canteen
-        </Link>
-        .
-      </p>
+        <div className="flex flex-wrap gap-2">
+          <select
+            value={cuisine ?? ""}
+            onChange={(event) => setCuisine(event.target.value || null)}
+            className="border-base-content/15 bg-neutral rounded-lg border px-3 py-1.5 text-sm"
+          >
+            <option value="">All cuisines</option>
+            {CUISINE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+
+          <div className="flex gap-1.5">
+            {PRICE_OPTIONS.map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() =>
+                  setPrice((current) => (current === option ? null : option))
+                }
+                className={`rounded-full border px-3 py-1.5 text-sm ${
+                  price === option
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-base-content/15 bg-neutral text-base-content/70"
+                }`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpenNowOnly((current) => !current)}
+            className={`rounded-full border px-3 py-1.5 text-sm ${
+              openNowOnly
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-base-content/15 bg-neutral text-base-content/70"
+            }`}
+          >
+            Open now
+          </button>
+
+          <select
+            value={sort}
+            onChange={(event) => setSort(event.target.value as SortValue)}
+            className="border-base-content/15 bg-neutral ml-auto rounded-lg border px-3 py-1.5 text-sm"
+          >
+            {SORT_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {results.map((venue) => (
+          <Link
+            key={venue.id}
+            href={`/venues/${venue.id}`}
+            className="bg-neutral border-base-content/15 hover:border-primary/40 flex flex-col rounded-xl border p-5 shadow-sm transition-colors"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-lg font-semibold">{venue.name}</h2>
+                <p className="text-base-content/70 mt-1 text-sm">
+                  {venue.building}
+                </p>
+              </div>
+              <span className="bg-primary/10 text-primary shrink-0 rounded-full px-2.5 py-1 text-xs font-medium">
+                {venue.kind}
+              </span>
+            </div>
+            <p className="text-base-content/70 mt-3 text-sm leading-6">
+              {venue.cuisine.join(" · ")}
+            </p>
+            <p className="text-base-content/50 mt-4 text-sm">
+              {venue.priceRange} · {venue.rating.toFixed(1)} (
+              {venue.reviewCount}) · ~{venue.estimatedWaitMinutes} min est.
+              wait
+            </p>
+            <p
+              className={`mt-2 text-xs font-medium ${
+                isOpenNow(venue.hours) ? "text-success-content" : "text-base-content/40"
+              }`}
+            >
+              {isOpenNow(venue.hours) ? "Open now" : "Closed now"}
+            </p>
+          </Link>
+        ))}
+
+        {results.length === 0 && (
+          <p className="text-base-content/60 col-span-full text-sm">
+            No venues match these filters. Try clearing one of them.
+          </p>
+        )}
+      </section>
     </div>
   );
 }
