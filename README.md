@@ -2,8 +2,6 @@
 
 Prototype a food discovery experience for HKUST students. This repository is a **starter**, not a solution.
 
-You have **7 days**. Stack: **Next.js**.
-
 Live design reference: [app.usthing.xyz](https://app.usthing.xyz)  
 Primary colour: `#003366`
 
