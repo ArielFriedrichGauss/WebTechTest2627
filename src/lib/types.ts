@@ -26,6 +26,11 @@ export type MenuItem = {
   available?: boolean;
 };
 
+export type MenuCategory = {
+  category: string;
+  items: MenuItem[];
+};
+
 export type Review = {
   id: string;
   venueId: string;
@@ -48,5 +53,5 @@ export type Venue = {
   rating: number;
   reviewCount: number;
   summary: string;
-  menu: MenuItem[];
+  menu: MenuCategory[];
 };
