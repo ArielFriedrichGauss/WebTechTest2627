@@ -3,14 +3,14 @@ import { ApplicantTodos } from "@/components/applicant-todos";
 import { sampleVenues } from "@/lib/sample-data";
 
 /**
- * Venues layout canvas — a catalogue of places, linking into detail.
- * One sample card is provided; the rest of the list is yours.
- * Sample venues live in src/lib/sample-data.ts.
+- Venues layout canvas — a catalogue of places, linking into detail.
+- One sample card is provided; the rest of the list is yours.
+- Sample venues live in src/lib/sample-data.ts.
  */
 
 export default function VenuesPage() {
-  // TODO: drop slice(0, 1) and map the full catalogue (search/sort optional).
-  const venues = sampleVenues.slice(0, 1);
+  // Drop slice(0, 1) and map the full catalogue of venues.
+  const venues = sampleVenues;
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-8 px-5 py-10 sm:px-8 sm:py-14">
@@ -27,40 +27,44 @@ export default function VenuesPage() {
         </p>
       </header>
 
-      {venues.map((venue) => (
-        <Link
-          key={venue.id}
-          href={`/venues/${venue.id}`}
-          className="bg-neutral border-base-content/15 hover:border-primary/40 max-w-md rounded-xl border p-5 shadow-sm transition-colors"
-        >
-          <div className="flex items-start justify-between gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {venues.map((venue) => (
+          <Link
+            key={venue.id}
+            href={`/venues/${venue.id}`}
+            className="bg-neutral border-base-content/15 hover:border-primary/40 rounded-xl border p-5 shadow-sm transition-colors flex flex-col justify-between"
+          >
             <div>
-              <h2 className="text-lg font-semibold">{venue.name}</h2>
-              <p className="text-base-content/70 mt-1 text-sm">
-                {venue.building}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold">{venue.name}</h2>
+                  <p className="text-base-content/70 mt-1 text-sm">
+                    {venue.building}
+                  </p>
+                </div>
+                <span className="bg-primary/10 text-primary shrink-0 rounded-full px-2.5 py-1 text-xs font-medium">
+                  {venue.kind}
+                </span>
+              </div>
+              <p className="text-base-content/70 mt-3 text-sm leading-6">
+                {venue.summary}
               </p>
             </div>
-            <span className="bg-primary/10 text-primary shrink-0 rounded-full px-2.5 py-1 text-xs font-medium">
-              {venue.kind}
-            </span>
-          </div>
-          <p className="text-base-content/70 mt-3 text-sm leading-6">
-            {venue.summary}
-          </p>
-          <p className="text-base-content/50 mt-4 text-sm">
-            {venue.priceRange} · {venue.rating.toFixed(1)} ({venue.reviewCount})
-            · ~{venue.estimatedWaitMinutes} min wait
-          </p>
-        </Link>
-      ))}
+            <p className="text-base-content/50 mt-4 text-sm pt-3 border-t border-base-content/10">
+              {venue.priceRange} · {venue.rating.toFixed(1)} ({venue.reviewCount})
+              · ~{venue.estimatedWaitMinutes} min wait
+            </p>
+          </Link>
+        ))}
+      </div>
 
-      <ApplicantTodos
+      /**<ApplicantTodos
         items={[
           "List the rest of the venues from src/lib/sample-data.ts using this card as a starting point.",
           "Link each venue to its detail stub at /venues/[id] (or a routing approach you prefer).",
           "Show enough facts that a student can pick a place before opening the inspect view.",
         ]}
-      />
+      />*/
     </div>
   );
 }
